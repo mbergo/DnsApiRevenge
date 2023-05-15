@@ -1,6 +1,6 @@
 import pytest
 from flask import Flask
-from api import app
+from ../src/api import app
 
 
 @pytest.fixture
@@ -16,4 +16,3 @@ def test_get_domains(client):
     # Assert other conditions based on the expected behavior of the API
 
 # Write more test cases for other API endpoints
-# TODO
