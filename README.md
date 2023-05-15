@@ -1,3 +1,4 @@
+[![Tests](https://github.com/mbergo/DnsApiRevenge/actions/workflows/python-app.yml/badge.svg)](https://github.com/mbergo/DnsApiRevenge/actions/workflows/python-app.yml)
 # RNDC API
 
 This is a Python API that provides REST endpoints to interact with RNDC (Remote Name Daemon Control) on BIND servers. It allows you to perform CRUD operations on domains and their records.
