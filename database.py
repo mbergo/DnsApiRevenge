@@ -26,12 +26,14 @@ class Database:
         self.conn.commit()
 
     def add_domain(self, domain):
-        self.cursor.execute('INSERT INTO domains (domain_name) VALUES (?)', (domain.domain_name,))
+        self.cursor.execute(
+            'INSERT INTO domains (domain_name) VALUES (?)', (domain.domain_name,))
         self.conn.commit()
         domain.id = self.cursor.lastrowid
 
     def update_domain(self, domain):
-        self.cursor.execute('UPDATE domains SET domain_name = ? WHERE id = ?', (domain.domain_name, domain.id))
+        self.cursor.execute(
+            'UPDATE domains SET domain_name = ? WHERE id = ?', (domain.domain_name, domain.id))
         self.conn.commit()
 
     def delete_domain(self, domain):
@@ -49,7 +51,16 @@ class Database:
         return domains
 
     def get_domain(self, domain_id):
-        # ...
+        self.cursor.execute('SELECT * FROM domains WHERE id = ?', (domain_id,))
+        row = self.cursor.fetchone()
+        if row is None:
+            return None
+        domain = Domain(row[1])
+        domain.id = row[0]
+
+        self.cursor.execute(
+            'SELECT * FROM records WHERE domain_id = ?', (domain.id,))
+        rows = self.cursor.fetchall()
         for row in rows:
             record = Record(row[2], row[3])
             record.id = row[0]
